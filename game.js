@@ -1,5 +1,5 @@
 "use strict";
-/* РУССКИЙ РЭП НА ВЫЛЕТ — Pixel Fighter
+/* РУССКИЙ РЭП БАТЛ — Pixel Fighter
  * Single-file canvas engine. All timings are in seconds and all speeds in px/s,
  * so the game runs the same on 60 Hz and 144 Hz displays.
  */
@@ -288,8 +288,6 @@ const SPECIALS = {
 /* Assets                                                              */
 /* ------------------------------------------------------------------ */
 const ASSET_PATHS = {
-  logo: "assets/ui/logo.png",
-  dklogo: "assets/ui/dk_logo.png",
   // optional generated art: titlebg -> "assets/ui/title_bg.webp"
   "bg.moscow": "assets/backgrounds/moscow_msu.webp",
   "bg.thailand": "assets/backgrounds/thailand_beach.webp",
@@ -3798,22 +3796,6 @@ function footer(str) {
   text(str, W / 2, H - 22, { size: 18, align: "center", color: "#c9c2ff", shadow: false });
 }
 
-// Author's Telegram channel
-const TG_URL = "https://t.me/dkdanceblog";
-function openTelegram() { if (YNDK.active) return; try { window.open(TG_URL, "_blank", "noopener"); } catch (e) {} }
-function tgButton(x, y) {
-  if (YNDK.active) return;   // Yandex forbids links off the platform
-  const label = "TELEGRAM @DKDANCEBLOG";
-  const bw = textWidth(label, 14, FONT_PIX) + 36, bh = 46;
-  const hov = hover && hover.id === "tg-btn";
-  ctx.fillStyle = hov ? "rgba(40,120,200,0.95)" : "rgba(10,6,28,0.8)";
-  ctx.fillRect(x, y, bw, bh);
-  ctx.strokeStyle = "#5fb8ff"; ctx.lineWidth = 3;
-  ctx.strokeRect(x + 1.5, y + 1.5, bw - 3, bh - 3);
-  text(label, x + 18, y + bh / 2 + 1, { size: 14, font: FONT_PIX, color: "#cfe9ff", shadow: false });
-  region("tg-btn", x, y, bw, bh, () => { confirmSfx(); openTelegram(); });
-}
-
 // Visible back button (top-left) — phones have no ESC
 function backButton() {
   const label = "НАЗАД";
@@ -3906,17 +3888,6 @@ function drawTitleLineup() {
 }
 
 function drawTitleLogo(cx, cy, scale) {
-  const logo = img("logo");
-  if (logo) {
-    const h = logo.naturalHeight * scale;
-    const w = logo.naturalWidth * scale;
-    ctx.save();
-    ctx.shadowColor = "rgba(255,120,30,0.55)";
-    ctx.shadowBlur = 24 + Math.sin(G.time * 3) * 10;
-    ctx.drawImage(logo, Math.round(cx - w / 2), Math.round(cy - h / 2), w, h);
-    ctx.restore();
-    return;
-  }
   ctx.save();
   ctx.translate(cx, cy);
   ctx.scale(scale, scale);
@@ -3929,8 +3900,8 @@ function drawTitleLogo(cx, cy, scale) {
   ctx.fillRect(-560, -160, 1120, 330);
   text("РУССКИЙ РЭП", 0, -40, { size: 104, align: "center", gradient: ["#ffffff", "#ffe27a", "#ff9a2e"],
     stroke: "#1a0830", strokeW: 14, shadowOff: 8 });
-  // "НА ВЫЛЕТ" on a red slab
-  const w2 = textWidth("НА ВЫЛЕТ", 76) + 70;
+  // "БАТЛ" on a red slab
+  const w2 = textWidth("БАТЛ", 76) + 70;
   ctx.save();
   ctx.translate(0, 62);
   ctx.transform(1, 0, -0.18, 1, 0, 0);
@@ -3943,7 +3914,7 @@ function drawTitleLogo(cx, cy, scale) {
   ctx.fillStyle = "rgba(255,255,255,0.18)";
   ctx.fillRect(-w2 / 2, -40, w2, 6);
   ctx.restore();
-  text("НА ВЫЛЕТ", 0, 64, { size: 76, align: "center", color: "#fff6e8", stroke: "#1a0830", strokeW: 10, shadowOff: 5 });
+  text("БАТЛ", 0, 64, { size: 76, align: "center", color: "#fff6e8", stroke: "#1a0830", strokeW: 10, shadowOff: 5 });
   text("PIXEL FIGHTER", 0, 132, { size: 18, font: FONT_PIX, align: "center", color: "#c9c2ff", stroke: "#000", strokeW: 5 });
   ctx.restore();
 }
@@ -4015,16 +3986,6 @@ function drawTitle() {
     ctx.strokeRect(15.5, 13.5, bw2 - 3, bh2 - 3);
     text(label, 34, 12 + bh2 / 2 + 1, { size: 18, font: FONT_PIX, color: GOLD, shadow: false });
     region("secrets", 14, 12, bw2, bh2, () => { confirmSfx(); openSecrets(); });
-  }
-  {   // author's logo, top-right under the sound button
-    const dk = img("dklogo");
-    if (dk && !YNDK.active) {
-      const h = 124, w = h * dk.naturalWidth / dk.naturalHeight, x = W - w - 18;
-      const hov = hover && hover.id === "tg-logo";
-      ctx.save(); ctx.globalAlpha = hov ? 1 : 0.92; ctx.drawImage(dk, x, 60, w, h); ctx.restore();
-      text("@DKDANCEBLOG", x + w / 2, 60 + h + 16, { size: 11, font: FONT_PIX, align: "center", color: hov ? "#cfe9ff" : "#9fd2ff", stroke: "#000", strokeW: 4 });
-      region("tg-logo", x - 20, 56, w + 40, h + 34, () => { confirmSfx(); openTelegram(); });
-    }
   }
   text("Неофициальная фанатская пародия. Не связана с исполнителями. Все персонажи — шаржи.", W / 2, H - 12, { size: 14, align: "center", color: "rgba(255,255,255,0.6)", stroke: "#000", strokeW: 4 });
   const badges = cheatBadges();
@@ -4286,7 +4247,6 @@ function drawArcadeEnd() {
   panel(bx, by, bw, bh, { active: true });
   text("В ГЛАВНОЕ МЕНЮ", 860, by + bh / 2 + 2, { size: 24, align: "center", color: GOLD, stroke: "#000", strokeW: 5 });
   region("arc-end", bx, by, bw, bh, () => { if (G.time - G.arcadeEndT > 1) { confirmSfx(); G.arcade = null; setScreen("title"); } });
-  tgButton(14, 12);
 }
 
 /* Secrets screen */
@@ -4910,7 +4870,6 @@ function drawEnd() {
   });
   G.endItems = items;
   drawSharePreview();
-  tgButton(14, 12);
 }
 function rematch() {
   confirmSfx();
@@ -5332,10 +5291,6 @@ function fmtTime(sec) {
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 }
 
-// Always the public address, wherever the game was opened from (local file, test server, a mirror)
-const GAME_URL = "https://dkdanceblog.github.io/mortalkombat/";
-function gameUrl() { return GAME_URL; }
-
 function shareTexts() {
   const mw = F.matchWinner;
   const [a, b] = F.fighters;
@@ -5398,7 +5353,7 @@ function makeShareCard(safe = false) {
     }
 
     const t = shareTexts();
-    text("РУССКИЙ РЭП НА ВЫЛЕТ", 56, 60, { size: 16, font: FONT_PIX, color: GOLD });
+    text("РУССКИЙ РЭП БАТЛ", 56, 60, { size: 16, font: FONT_PIX, color: GOLD });
     const s1 = fitText(t.h1, 600, 72);
     const s2 = fitText(t.h2, 600, 72);
     text(t.h1, 56, 160, { size: s1, gradient: ["#ffffff", "#e6e0ff"], stroke: "#12051f", strokeW: 8 });
@@ -5426,12 +5381,9 @@ function makeShareCard(safe = false) {
       bx += bw + 12;
     }
 
-    const url = gameUrl();
     ctx.fillStyle = "rgba(0,0,0,0.6)";
     ctx.fillRect(0, CH - 64, CW, 64);
-    const playLine = "СЫГРАЙ САМ: " + url.replace(/^https?:\/\//, "").replace(/\/$/, "");
-    text(playLine, 56, CH - 32, { size: fitText(playLine, 760, 24), color: "#fff6c8", shadow: false });
-    text("t.me/dkdanceblog", CW - 40, CH - 32, { size: 22, align: "right", color: "#9fd2ff", shadow: false });
+    text("PIXEL FIGHTER", 56, CH - 32, { size: 24, color: "#fff6c8", shadow: false });
   } finally {
     ctx = main;
   }
@@ -5490,7 +5442,7 @@ function loadShareAssets(cb) {
 function saveCard(card) {
   const blob = dataUrlToBlob(card.toDataURL("image/png"));
   G.sharePreview = { canvas: card, t: 4 };
-  downloadBlob(blob, "russkiy-rap-na-vylet.png");
+  downloadBlob(blob, "russkiy-rap-battle.png");
   toast("КАРТИНКА СОХРАНЕНА");
 }
 function shareResult() {
