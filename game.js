@@ -8,6 +8,7 @@ const canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
 const W = canvas.width;
 const H = canvas.height;
+canvas.addEventListener("contextmenu", (e) => e.preventDefault());
 
 const FLOOR_Y = 600;
 const GRAVITY = 3900;     // snappier, less floaty jumps
@@ -51,10 +52,10 @@ const CHARS = {
     id: "guf", name: "ГУФ", special: "ЧАЙ", color: "#f0e3b0",
     speed: 295, power: 1.0, specialCd: 2.6, tough: 1.0, jump: 1.0, weight: 1.0, dash: 1.0,
     stats: { "СКОРОСТЬ": 3, "СИЛА": 3, "ЗДОРОВЬЕ": 3 },
-    perk: "ФИШКА: иногда пьяно уворачивается от удара",
-    blurb: "Пьяный мастер.",
-    loseTitle: "ГУФ УМЕР",
-    quotes: ["АЛИК В УДАРЕ", "ЧИТАЙ СВОИ СТИШКИ", "КУДА СЪЕБ*ЛСЯ?"],
+    perk: "ФИШКА: иногда чудом уворачивается от удара",
+    blurb: "Мастер непредсказуемых уклонов.",
+    loseTitle: "ГУФ НА ПОЛУ",
+    quotes: ["АЛИК В УДАРЕ", "ЧИТАЙ СВОИ СТИШКИ", "КУДА ТЕБЯ НЕСЛО?"],
     moves: {
       // spinning back kick: turns his back, then lunges with a heel strike
       heavy: { frame: "heavy", startup: 0.17, active: 0.1, recovery: 0.3, dmg: 10, reach: 130, lunge: 280, spin: true,
@@ -68,7 +69,7 @@ const CHARS = {
     perk: "ФИШКА: концовка связки бьёт на 25% сильнее",
     blurb: "Король фристайла с гитарой.",
     loseTitle: "НОЙЗ СДУЛСЯ",
-    quotes: ["ПРЕДУПРЕЖДАЮ, У*БЫВАЮ", "ЩА УСТРОЮ ДЕСТРОЙ", "ВЫДЫХАЙСЯ СКОРЕЙ"],
+    quotes: ["ПРЕДУПРЕЖДАЮ: БОЛИТ БУДЕТ", "ЩА УСТРОЮ ДЕСТРОЙ", "ВЫДЫХАЙСЯ СКОРЕЙ"],
     moves: {
       // swings the guitar by the neck — long reach, hits crouching opponents too
       heavy: { frame: "light", startup: 0.16, active: 0.11, recovery: 0.3, dmg: 10, reach: 158, guitar: true,
@@ -99,7 +100,7 @@ const CHARS = {
     perk: "ФИШКА: начинает раунд с запасом панча",
     blurb: "Финальный босс. Строчит азбукой как из пулемёта.",
     loseTitle: "ЧИПИНКОС ВЫУЧИЛ УРОК",
-    quotes: ["Я ГАНГСТЕР!", "Я И ЕСТЬ ХИП-ХОП!", "ТЫ ЛОХ", "УЧИ МОЮ АЗБУКУ!", "ИДИ НАХ*Й", "ТЫ МАМКИН ГАНГСТЕР"],
+    quotes: ["Я ГАНГСТЕР!", "Я И ЕСТЬ ХИП-ХОП!", "ТЫ ЛОХ", "УЧИ МОЮ АЗБУКУ!", "ИДИ УЧИ УРОКИ", "ТЫ МАМКИН ГАНГСТЕР"],
     moves: {
       // punch with a fist wrapped in silver chains: a bit longer and heavier than a normal jab
       light: { frame: "light", startup: 0.07, active: 0.09, recovery: 0.17, dmg: 6, reach: 112,
@@ -111,9 +112,9 @@ const CHARS = {
     speed: 300, power: 0.9, specialCd: 5.5, tough: 1.0, jump: 1.0, weight: 1.05, dash: 1.0,
     stats: { "СКОРОСТЬ": 3, "СИЛА": 3, "ЗДОРОВЬЕ": 3 },
     perk: "ФИШКА: у стены бьёт на 25% сильнее",
-    blurb: "Уронил Запад и Россию.",
+    blurb: "Главный по бургерам и бифам.",
     loseTitle: "FACE В БЛЭКЛИСТЕ",
-    quotes: ["Я РОНЯЮ ЗАПАД, У", "ЖРИ МОЙ БУРГЕР", "ТЫ ПОПАЛ В БЛЭКЛИСТ!", "МНЕ ПОХ*Й"],
+    quotes: ["Я РОНЯЮ ЗАПАД, У", "ЖРИ МОЙ БУРГЕР", "ТЫ ПОПАЛ В БЛЭКЛИСТ!", "МНЕ ВСЁ РАВНО"],
     moves: {
       // shuto: knife-hand chop from above — reaches crouching opponents
       light: { frame: "light", startup: 0.08, active: 0.09, recovery: 0.18, dmg: 7, reach: 112,
@@ -148,8 +149,8 @@ const CHARS = {
     perk: "ФИШКА: даже через блок посох отнимает здоровье",
     blurb: "Общается с миром мёртвых.",
     loseTitle: "ATL РАСЧЕХЛИЛИ",
-    quotes: ["ПОХЕР, ТАНЦУЙТЕ!", "СЛЫШЬ, БРАТИШКА, НЕ БОРЩИ", "Я ВСКРОЮ ТВОЁ ЛИЦО", "Я РАСЧЕХЛЮ СВОЙ БОЖЕСТВЕННЫЙ ФЛОУ",
-      "ВЕСЬ ТВОЙ ГЭНГСТА НА ТУАЛЕТНОЙ БУМАГЕ", "ТЫ САМЫЙ КРУПНЫЙ ИЗ СЕКСУАЛЬНЫХ МЕНЬШИНСТВ"],
+    quotes: ["ПОФИГУ, ТАНЦУЙТЕ!", "СЛЫШЬ, БРАТИШКА, НЕ БОРЩИ", "Я ВСКРОЮ ТВОЁ ЛИЦО", "Я РАСЧЕХЛЮ СВОЙ БОЖЕСТВЕННЫЙ ФЛОУ",
+      "ВЕСЬ ТВОЙ ГЭНГСТА — НА БУМАГЕ", "ТЫ САМЫЙ МЯГКИЙ ПАРЕНЬ В ЭТОМ БИЗНЕСЕ"],
     // staff: longer reach; "heavy" is a short-range dark-magic bolt instead of a kick
     moves: {
       light: { frame: "light", startup: 0.09, active: 0.1, recovery: 0.2, dmg: 6, reach: 165,
@@ -159,13 +160,13 @@ const CHARS = {
     },
   },
   slava: {
-    id: "slava", name: "СЛАВА КПСС", special: "ТОЛПА", color: "#ff5a4a",
+    id: "slava", name: "СЛАВА КИПЯТОК", special: "ТОЛПА", color: "#ff5a4a",
     speed: 315, power: 1.04, specialCd: 5.5, tough: 0.97, jump: 1.0, weight: 1.0, dash: 1.1,
     stats: { "СКОРОСТЬ": 4, "СИЛА": 3, "ЗДОРОВЬЕ": 3 },
     perk: "ФИШКА: рывком проскакивает за спину",
     blurb: "Главный трикстер.",
-    loseTitle: "СЛАВА В АНТИХАЙПЕ",
-    quotes: ["ЛУЧШЕ Я СДОХНУ, ЧЕМ СТАНУ ТОБОЙ!", "Я ЕДИНСТВЕННЫЙ РЭПЕР!", "ТЫ ЛОВИШЬ ПРЯМОЙ В КАДЫК", "АНТИХАЙП!"],
+    loseTitle: "СЛАВА ПЕРЕКИПЕЛ",
+    quotes: ["ЛУЧШЕ УЙДУ ИЗ РЭПА, ЧЕМ СТАНУ ТОБОЙ!", "Я ЕДИНСТВЕННЫЙ РЭПЕР!", "ТЫ ЛОВИШЬ ПРЯМОЙ В КАДЫК", "АНТИХАЙП!"],
   },
   kreed: {
     id: "kreed", name: "ЕГОР", special: "СИНЯК", color: "#7aa8e8",
@@ -187,9 +188,9 @@ const CHARS = {
       "ЭЙ, МАМОЧКА ДОМА",
       "МОЙ СТИЛИСТ — СТИЛИСТ ТВОЕГО СТИЛИСТА",
       "РАЗНЕСУ ТЕБЕ УТРЕСКИ",
-      "ЭТУ КИСКУ ИЗИ ЗАГИБАЮ В ДОГИ!",
-      "У МЕНЯ ПОБОЛЬШЕ ЯЙЦА!",
-      "ТЫ СИЛИКОНОВЫЙ ГНОМ",
+      "ТАКОЙ БАТЛ ИЗИ ЗАБИРАЮ СЕБЕ!",
+      "ХАРАКТЕРА У МЕНЯ ПОБОЛЬШЕ!",
+      "ТЫ ПЛАСТИЛИНОВЫЙ ГНОМ",
     ],
   },
   morgen: {
@@ -199,7 +200,7 @@ const CHARS = {
     perk: "ФИШКА: удар сразу после рывка сильнее на 30%",
     blurb: "Молодой аристократ.",
     loseTitle: "МОРГЕН СКАТИЛСЯ",
-    quotes: ["ПОСОСИ", "МНЕ ПОХ", "ТЫ ПОДОХ"],
+    quotes: ["ОТДОХНИ", "МНЕ ВСЁ РАВНО", "ТЫ ОТСТАЛ"],
     moves: {
       // slap with a wad of cash — bills fly everywhere
       light: { frame: "light", startup: 0.06, active: 0.08, recovery: 0.16, dmg: 6, reach: 104, money: true,
@@ -315,7 +316,7 @@ const ASSET_PATHS = {
   "portrait.morgen": "assets/portraits/morgen_portrait.png",
   "portrait.maybe": "assets/portraits/maybe_portrait.png",
   "fx.kettle": "assets/effects/kettle_projectile.png",
-  "fx.gnome": "assets/effects/gnome.png",     // optional: face for Maybe's "силиконовый гном"
+  "fx.gnome": "assets/effects/gnome.png",     // optional: face for Maybe's "пластилиновый гном"
   "fx.zamay": "assets/effects/zamay.png",     // optional: face for Slava's "антихайп"
   "fx.guitar": "assets/effects/guitar_projectile.png",
   "fx.cadillac": "assets/effects/cadillac_projectile.png",
@@ -346,10 +347,8 @@ let loaded = 0;
 let total = 0;
 let fontsReady = false;
 
-// Stage-select thumbnails: small copies so the menu doesn't need the full arenas
-for (const k of Object.keys(ASSET_PATHS)) {
-  if (k.startsWith("bg.")) ASSET_PATHS["thumb." + k.slice(3)] = ASSET_PATHS[k].replace("backgrounds/", "backgrounds/thumbs/");
-}
+// Stage-select thumbnails are disabled: the thumbs/ copies don't ship with the
+// build, and the stage select already falls back to the full backgrounds.
 // Only what the menus need blocks the loading screen; full arenas and fight poses
 // download in the background right after (and the VS screen waits for them if needed).
 function deferredAsset(key) {
@@ -490,7 +489,7 @@ function unlockAudio() {
 }
 
 function playSfx(name) {
-  if (!audioUnlocked || muted) return;
+  if (soundHold > 0 || pageHidden || !audioUnlocked || muted) return;
   const bufs = sfxBuf[name];
   if (actx && bufs && bufs.length) {
     if (voices > 28) return;   // never pile up more than ~28 sounds at once
@@ -522,34 +521,15 @@ function playSfx(name) {
   } catch (e) {}
 }
 
-// Music follows the screen: menu → select → arena track (boss in the arcade final) → win / lose jingle.
-// Tracks load only when first needed, so they don't slow down the start.
-const MUSIC = {
-  menu: "menu", select: "select", bar: "bar", yard: "yard", circus: "circus", fountains: ["fountains", "fountains_2"], concert: "concert",
-  londograd: "londograd", moscow: "moscow", thailand: "thailand", boss: "boss", tutorial: "select",
-  jingle_win: "jingle_win", jingle_lose: "jingle_lose", jingle_arcade_end: "jingle_arcade_end",
-};
-const MUSIC_VOL = { jingle_win: 0.42, jingle_lose: 0.3, jingle_arcade_end: 0.3 };
+// No music tracks ship with the build (assets/music/ is absent), so the music
+// system stays idle: the plumbing below keeps its call sites, but wantedMusic()
+// never requests a file — no 404s in the console.
 let musicKey = null, musicFile = null;
 function wantedMusic() {
-  const s = G.screen;
-  if (s === "loading") return null;
-  if (s === "fight") {
-    if (!F) return null;
-    if (G.tutorial) return "tutorial";
-    return G.arcadeBoss ? "boss" : (MUSIC[G.stage] ? G.stage : "bar");
-  }
-  if (s === "end") {
-    if (!F) return null;
-    const youWon = G.mode === 2 ? F.matchWinner >= 0 : F.matchWinner === 0;
-    return youWon ? "jingle_win" : "jingle_lose";
-  }
-  if (s === "arcadeEnd") return G.screenT < 16 ? "jingle_arcade_end" : "menu";
-  if (s === "character" || s === "stage" || s === "vs" || s === "ladder") return "select";
-  return "menu";
+  return null;
 }
 function updateMusic() {
-  if (!audioUnlocked || muted) { if (!music.paused) music.pause(); return; }
+  if (soundHold > 0 || pageHidden || !audioUnlocked || muted) { if (!music.paused) music.pause(); return; }
   const key = wantedMusic();
   if (key !== musicKey) {
     musicKey = key;
@@ -593,7 +573,7 @@ function voice(f, what, chance = 1) {
 const ambEl = new Audio(); ambEl.loop = true; ambEl.preload = "auto";
 let ambStage = null;
 function updateAmbience() {
-  const want = G.screen === "fight" && !G.paused && !muted && audioUnlocked ? AMBIENCE[G.stage] || null : null;
+  const want = G.screen === "fight" && !G.paused && !muted && !pageHidden && soundHold === 0 && audioUnlocked ? AMBIENCE[G.stage] || null : null;
   if (want !== ambStage) {
     ambStage = want;
     try {
@@ -608,6 +588,25 @@ function setMuted(m) {
   updateMusic();
   toast(m ? "ЗВУК ВЫКЛЮЧЕН" : "ЗВУК ВКЛЮЧЁН");
 }
+
+/* Sound holds: a hidden tab or an ad break silences everything at once
+   (Yandex requires audio to pause on tab switch and during ads). */
+let pageHidden = false, soundHold = 0;
+function audioHold(on) {
+  soundHold = Math.max(0, soundHold + (on ? 1 : -1));
+  const stop = pageHidden || soundHold > 0;
+  try { if (actx) { if (stop) actx.suspend(); else actx.resume(); } } catch (e) {}
+  if (stop) {
+    try { if (!ambEl.paused) ambEl.pause(); } catch (e) {}
+    try { music.pause(); } catch (e) {}
+  } else {
+    updateAmbience();
+    updateMusic();
+  }
+}
+document.addEventListener("visibilitychange", () => { pageHidden = document.hidden; audioHold(false); });
+document.addEventListener("yndk-ad-open", () => audioHold(true));
+document.addEventListener("yndk-ad-close", () => audioHold(false));
 
 /* ------------------------------------------------------------------ */
 /* Global state                                                        */
@@ -1833,7 +1832,7 @@ function hostPose() {
 }
 
 // Restorator's lines (approved texts)
-const HOST_LINES = { intro: "ПОШУМИМ, БЛ*ТЬ!", hit: "ЖАРИШКО!", ko: "НЕПЛОХО!", match: "ЭТО БЫЛ ВЕРСУС БАТТЛ..." };
+const HOST_LINES = { intro: "ПОШУМИМ, РЕБЯТА!", hit: "ЖАРИШКО!", ko: "НЕПЛОХО!", match: "ЭТО БЫЛ ВЕРСУС БАТТЛ..." };
 function hostLine() {
   if (!F) return null;
   if (F.phase === "intro") return HOST_LINES.intro;
@@ -1873,7 +1872,7 @@ function drawBarHost(camX) {
 }
 
 function drawBarCrowd(camX) {
-  // Easter egg: Oxxxy vs Slava KPSS on the Versus stage — the legendary 2017 battle
+  // Easter egg: Oxxxy vs Slava on the Versus stage — the legendary 2017 battle
   const ids = F.fighters.map((f) => f.cid).sort().join();
   if (ids === "oxxxy,slava" && F.phase === "intro" && F.round === 1) {
     if (!F.versusEgg) { F.versusEgg = true; unlockSecret("versus"); }
@@ -1897,8 +1896,8 @@ function drawBarCrowd(camX) {
 /* Super moves, throws                                                 */
 /* ------------------------------------------------------------------ */
 const SUPER_NAMES = {
-  guf: "ХЛЕБНИ ЧАЯ!", noize: "MAKE SOME NOIZE", oxxxy: "РАУНД, С*КА", morgen: "АЛИШЕР ТАГИРОВИЧ",
-  maybe: "БИЛЕТ В МЭЙБИЛЭНД!", kreed: "СЮДА, БЛИН", slava: "ПРИДИ И ОХЛАДИ МОЙ ПЫЛ", atl: "Я ТЕБЯ ОТПЕЛ",
+  guf: "ХЛЕБНИ ЧАЯ!", noize: "MAKE SOME NOIZE", oxxxy: "РАУНД, ДЕРЖИСЬ", morgen: "МОЛОДОЙ АРИСТОКРАТ",
+  maybe: "БИЛЕТ В МЭЙБИЛЭНД!", kreed: "СЮДА, БЛИН", slava: "ПОРА ЗАКИПАТЬ!", atl: "Я ТЕБЯ ОТПЕЛ",
   korzh: "МАЛЫЙ ПОВЗРОСЛЕЛ", face: "Я РОНЯЮ ЗАПАД", chip: "ЭТО МОЁ ГЭНГСТА!",
 };
 
@@ -4120,10 +4119,10 @@ const ARCADE_TEXT = {
   champion: "ЧЕМПИОН!",
 };
 const ARCADE_ENDINGS = {
-  guf: "Пьяный мастер всех обошёл.",
+  guf: "Непредсказуемый мастер всех обошёл.",
   noize: "Нойз МС — царь горы.",
   oxxxy: "Хитрый Окс опять всех переиграл.",
-  morgen: "Алишер Иуда Моргенштерн снова трахнул игру.",
+  morgen: "Молодой аристократ снова обошёл всю игру.",
   maybe: "Мэйби Бэйби доказала, что она мать рэп игры.",
   kreed: "Егор устроил шоу-представление.",
   slava: "АНТИХАЙП ПОБЕДИЛ.",
@@ -4671,8 +4670,8 @@ function chooseStage(id) {
 
 /* VS screen ------------------------------------------------------------ */
 const VS_LINES = [
-  "КТО-ТО СЕГОДНЯ ВЫЛЕТИТ", "БИФ СЕЗОНА", "КОМУ-ТО ПИЗД*Ц", "ГОТОВЬТЕ ПАНЧИ",
-  "ЧЬЮ КАРЬЕРУ ХОРОНИМ?", "БУДЕТ МЯСО", "ПОШУМИМ, БЛ*ТЬ",
+  "КТО-ТО СЕГОДНЯ ВЫЛЕТИТ", "БИФ СЕЗОНА", "КОМУ-ТО НЕ ПОВЕЗЁТ", "ГОТОВЬТЕ ПАНЧИ",
+  "ЧЬЮ КАРЬЕРУ ХОРОНИМ?", "БУДЕТ МЯСО", "ПОШУМИМ, РЕБЯТА",
 ];
 function startVs() {
   const [c0, c1] = G.chars;
@@ -4893,13 +4892,13 @@ function drawLoading() {
 /* ------------------------------------------------------------------ */
 // Achievements for the result of a match: winner (human) / loser / arena
 const SECRETS = [
-  { id: "a_50", name: "5:0", win: "slava", lose: "oxxxy", how: "Победи Оксимирона за Славу КПСС" },
-  { id: "a_guf_dead", name: "ГУФ УМЕР", lost: "guf", how: "Проиграй за Гуфа" },
+  { id: "a_50", name: "5:0", win: "slava", lose: "oxxxy", how: "Победи Оксимирона за Славу Кипятка" },
+  { id: "a_guf_dead", name: "ГУФ НА ПОЛУ", lost: "guf", how: "Проиграй за Гуфа" },
   { id: "a_sleeping", name: "СПЯЩАЯ КРАСАВИЦА", win: "noize", lose: "guf", how: "Победи Гуфа за Нойза" },
   { id: "a_chepushila", name: "ЧЕПУШИЛА", win: "guf", lose: "noize", how: "Победи Нойза за Гуфа" },
   { id: "a_ded", name: "ДЕД СЪЕЛ МОРГЕНШТЕРНА", win: "oxxxy", lose: "morgen", how: "Победи Моргенштерна за Оксимирона" },
   { id: "a_trombone", name: "ГРУСТНЫЙ ТРОМБОН", win: "morgen", lose: "oxxxy", how: "Победи Оксимирона за Моргенштерна" },
-  { id: "a_khabarovsk", name: "ХАБАРОВСК", win: "slava", stage: "fountains", how: "Выиграй за Славу КПСС на Мёртвых фонтанах" },
+  { id: "a_khabarovsk", name: "ХАБАРОВСК", win: "slava", stage: "fountains", how: "Выиграй за Славу Кипятка на Мёртвых фонтанах" },
   { id: "a_show", name: "ВСЕ ХОТЯТ ОТ МЕНЯ ШОУ", win: "morgen", stage: "circus", how: "Выиграй за Моргенштерна в Цирке" },
   { id: "a_greenpark", name: "ГРИН ПАРК ЖИВ", win: "oxxxy", stage: "londograd", how: "Выиграй за Оксимирона в Лондонграде" },
   { id: "a_center", name: "СПАСИБО ЦЕНТРУ ЗА ЭТО!", win: "guf", stage: "moscow", how: "Выиграй за Гуфа в Городе дорог" },
@@ -4989,7 +4988,7 @@ function checkCodes(code) {
 
 /* Evil twin */
 const TWIN_TINT = { color: "#2a0645", a: 0.5 };
-const ACCUSATIVE = { guf: "ГУФА", noize: "НОЙЗА", oxxxy: "ОКСИ", morgen: "МОРГЕНА", maybe: "МЭЙБИ БЭЙБИ", kreed: "ЕГОРА", slava: "СЛАВУ КПСС", atl: "ATL", korzh: "МАКСА КОРЖА", face: "FACE", chip: "ЧИПИНКОСА" };
+const ACCUSATIVE = { guf: "ГУФА", noize: "НОЙЗА", oxxxy: "ОКСИ", morgen: "МОРГЕНА", maybe: "МЭЙБИ БЭЙБИ", kreed: "ЕГОРА", slava: "СЛАВУ КИПЯТКА", atl: "ATL", korzh: "МАКСА КОРЖА", face: "FACE", chip: "ЧИПИНКОСА" };
 const FEMININE = new Set(["maybe"]);
 function twinData(cid) {
   const base = CHARS[cid];
@@ -5071,7 +5070,7 @@ function quoteEffect(f, line) {
   } else if (line.includes("ЭТУ РОЗУ")) {
     F.roses = 2.6;
     unlockSecret("rose");
-  } else if (line.includes("СИЛИКОНОВЫЙ ГНОМ")) {
+  } else if (line.includes("ПЛАСТИЛИНОВЫЙ ГНОМ")) {
     F.peek = { key: "gnome", t: 0, side: f.slot === 0 ? 1 : -1 };   // a gnome's face peeks in from the edge
     unlockSecret("eggs");
   } else if (line === "АЛИК В УДАРЕ") {

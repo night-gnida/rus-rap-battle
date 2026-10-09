@@ -68,8 +68,9 @@ const YNDK = (() => {
       if (!ysdk || matchCount < 1 || Date.now() - lastAdv < ADV_COOLDOWN) { done(); return; }
       lastAdv = Date.now();
       api.gameplayStop();
+      document.dispatchEvent(new Event("yndk-ad-open"));   // the game silences itself for the break
       let fired = false;
-      const fin = () => { if (!fired) { fired = true; done(); } };
+      const fin = () => { if (!fired) { fired = true; document.dispatchEvent(new Event("yndk-ad-close")); done(); } };
       try {
         ysdk.adv.showFullscreenAdv({ callbacks: { onOpen() {}, onClose: fin, onError: fin } });
         setTimeout(fin, 20000);   // never block the game if the SDK stalls
