@@ -52,10 +52,10 @@ const CHARS = {
     id: "guf", name: "ГУФ", special: "ЧАЙ", color: "#f0e3b0",
     speed: 295, power: 1.0, specialCd: 2.6, tough: 1.0, jump: 1.0, weight: 1.0, dash: 1.0,
     stats: { "СКОРОСТЬ": 3, "СИЛА": 3, "ЗДОРОВЬЕ": 3 },
-    perk: "ФИШКА: иногда чудом уворачивается от удара",
-    blurb: "Мастер непредсказуемых уклонов.",
+    perk: "ФИШКА: иногда пьяно уворачивается от удара",
+    blurb: "Пьяный мастер.",
     loseTitle: "ГУФ НА ПОЛУ",
-    quotes: ["АЛИК В УДАРЕ", "ЧИТАЙ СВОИ СТИШКИ", "КУДА ТЕБЯ НЕСЛО?"],
+    quotes: ["АЛИК В УДАРЕ", "ЧИТАЙ СВОИ СТИШКИ", "КУДА СЪЕБ*ЛСЯ?"],
     moves: {
       // spinning back kick: turns his back, then lunges with a heel strike
       heavy: { frame: "heavy", startup: 0.17, active: 0.1, recovery: 0.3, dmg: 10, reach: 130, lunge: 280, spin: true,
@@ -69,7 +69,7 @@ const CHARS = {
     perk: "ФИШКА: концовка связки бьёт на 25% сильнее",
     blurb: "Король фристайла с гитарой.",
     loseTitle: "НОЙЗ СДУЛСЯ",
-    quotes: ["ПРЕДУПРЕЖДАЮ: БОЛИТ БУДЕТ", "ЩА УСТРОЮ ДЕСТРОЙ", "ВЫДЫХАЙСЯ СКОРЕЙ"],
+    quotes: ["ПРЕДУПРЕЖДАЮ, У*БЫВАЮ", "ЩА УСТРОЮ ДЕСТРОЙ", "ВЫДЫХАЙСЯ СКОРЕЙ"],
     moves: {
       // swings the guitar by the neck — long reach, hits crouching opponents too
       heavy: { frame: "light", startup: 0.16, active: 0.11, recovery: 0.3, dmg: 10, reach: 158, guitar: true,
@@ -100,7 +100,7 @@ const CHARS = {
     perk: "ФИШКА: начинает раунд с запасом панча",
     blurb: "Финальный босс. Строчит азбукой как из пулемёта.",
     loseTitle: "ЧИПИНКОС ВЫУЧИЛ УРОК",
-    quotes: ["Я ГАНГСТЕР!", "Я И ЕСТЬ ХИП-ХОП!", "ТЫ ЛОХ", "УЧИ МОЮ АЗБУКУ!", "ИДИ УЧИ УРОКИ", "ТЫ МАМКИН ГАНГСТЕР"],
+    quotes: ["Я ГАНГСТЕР!", "Я И ЕСТЬ ХИП-ХОП!", "ТЫ ЛОХ", "УЧИ МОЮ АЗБУКУ!", "ИДИ НАХ*Й", "ТЫ МАМКИН ГАНГСТЕР"],
     moves: {
       // punch with a fist wrapped in silver chains: a bit longer and heavier than a normal jab
       light: { frame: "light", startup: 0.07, active: 0.09, recovery: 0.17, dmg: 6, reach: 112,
@@ -114,7 +114,7 @@ const CHARS = {
     perk: "ФИШКА: у стены бьёт на 25% сильнее",
     blurb: "Главный по бургерам и бифам.",
     loseTitle: "FACE В БЛЭКЛИСТЕ",
-    quotes: ["Я РОНЯЮ ЗАПАД, У", "ЖРИ МОЙ БУРГЕР", "ТЫ ПОПАЛ В БЛЭКЛИСТ!", "МНЕ ВСЁ РАВНО"],
+    quotes: ["Я РОНЯЮ ЗАПАД, У", "ЖРИ МОЙ БУРГЕР", "ТЫ ПОПАЛ В БЛЭКЛИСТ!", "МНЕ ПОХ*Й"],
     moves: {
       // shuto: knife-hand chop from above — reaches crouching opponents
       light: { frame: "light", startup: 0.08, active: 0.09, recovery: 0.18, dmg: 7, reach: 112,
@@ -149,8 +149,8 @@ const CHARS = {
     perk: "ФИШКА: даже через блок посох отнимает здоровье",
     blurb: "Общается с миром мёртвых.",
     loseTitle: "ATL РАСЧЕХЛИЛИ",
-    quotes: ["ПОФИГУ, ТАНЦУЙТЕ!", "СЛЫШЬ, БРАТИШКА, НЕ БОРЩИ", "Я ВСКРОЮ ТВОЁ ЛИЦО", "Я РАСЧЕХЛЮ СВОЙ БОЖЕСТВЕННЫЙ ФЛОУ",
-      "ВЕСЬ ТВОЙ ГЭНГСТА — НА БУМАГЕ", "ТЫ САМЫЙ МЯГКИЙ ПАРЕНЬ В ЭТОМ БИЗНЕСЕ"],
+    quotes: ["ПОХЕР, ТАНЦУЙТЕ!", "СЛЫШЬ, БРАТИШКА, НЕ БОРЩИ", "Я ВСКРОЮ ТВОЁ ЛИЦО", "Я РАСЧЕХЛЮ СВОЙ БОЖЕСТВЕННЫЙ ФЛОУ",
+      "ВЕСЬ ТВОЙ ГЭНГСТА НА ТУАЛЕТНОЙ БУМАГЕ", "ТЫ САМЫЙ КРУПНЫЙ ИЗ СЕКСУАЛЬНЫХ МЕНЬШИНСТВ"],
     // staff: longer reach; "heavy" is a short-range dark-magic bolt instead of a kick
     moves: {
       light: { frame: "light", startup: 0.09, active: 0.1, recovery: 0.2, dmg: 6, reach: 165,
@@ -166,7 +166,7 @@ const CHARS = {
     perk: "ФИШКА: рывком проскакивает за спину",
     blurb: "Главный трикстер.",
     loseTitle: "СЛАВА ПЕРЕКИПЕЛ",
-    quotes: ["ЛУЧШЕ УЙДУ ИЗ РЭПА, ЧЕМ СТАНУ ТОБОЙ!", "Я ЕДИНСТВЕННЫЙ РЭПЕР!", "ТЫ ЛОВИШЬ ПРЯМОЙ В КАДЫК", "АНТИХАЙП!"],
+    quotes: ["ЛУЧШЕ Я СДОХНУ, ЧЕМ СТАНУ ТОБОЙ!", "Я ЕДИНСТВЕННЫЙ РЭПЕР!", "ТЫ ЛОВИШЬ ПРЯМОЙ В КАДЫК", "АНТИХАЙП!"],
   },
   kreed: {
     id: "kreed", name: "ЕГОР", special: "СИНЯК", color: "#7aa8e8",
@@ -188,9 +188,9 @@ const CHARS = {
       "ЭЙ, МАМОЧКА ДОМА",
       "МОЙ СТИЛИСТ — СТИЛИСТ ТВОЕГО СТИЛИСТА",
       "РАЗНЕСУ ТЕБЕ УТРЕСКИ",
-      "ТАКОЙ БАТЛ ИЗИ ЗАБИРАЮ СЕБЕ!",
-      "ХАРАКТЕРА У МЕНЯ ПОБОЛЬШЕ!",
-      "ТЫ ПЛАСТИЛИНОВЫЙ ГНОМ",
+      "ЭТУ КИСКУ ИЗИ ЗАГИБАЮ В ДОГИ!",
+      "У МЕНЯ ПОБОЛЬШЕ ЯЙЦА!",
+      "ТЫ СИЛИКОНОВЫЙ ГНОМ",
     ],
   },
   morgen: {
@@ -200,7 +200,7 @@ const CHARS = {
     perk: "ФИШКА: удар сразу после рывка сильнее на 30%",
     blurb: "Молодой аристократ.",
     loseTitle: "МОРГЕН СКАТИЛСЯ",
-    quotes: ["ОТДОХНИ", "МНЕ ВСЁ РАВНО", "ТЫ ОТСТАЛ"],
+    quotes: ["ПОСОСИ", "МНЕ ПОХ", "ТЫ ПОДОХ"],
     moves: {
       // slap with a wad of cash — bills fly everywhere
       light: { frame: "light", startup: 0.06, active: 0.08, recovery: 0.16, dmg: 6, reach: 104, money: true,
@@ -316,7 +316,7 @@ const ASSET_PATHS = {
   "portrait.morgen": "assets/portraits/morgen_portrait.png",
   "portrait.maybe": "assets/portraits/maybe_portrait.png",
   "fx.kettle": "assets/effects/kettle_projectile.png",
-  "fx.gnome": "assets/effects/gnome.png",     // optional: face for Maybe's "пластилиновый гном"
+  "fx.gnome": "assets/effects/gnome.png",     // optional: face for Maybe's "силиконовый гном"
   "fx.zamay": "assets/effects/zamay.png",     // optional: face for Slava's "антихайп"
   "fx.guitar": "assets/effects/guitar_projectile.png",
   "fx.cadillac": "assets/effects/cadillac_projectile.png",
@@ -452,7 +452,7 @@ let audioUnlocked = false;
 let muted = store.get("muted", false);
 
 const SFX_VOLUME = {
-  hitLight: 0.7, hitHeavy: 0.8, hitBody: 0.8, hitCrit: 0.9, block: 0.65, koHit: 1.0, superStart: 0.8, crowdReact: 0.5, hitKick: 0.75, whooshLight: 0.3, whooshHeavy: 0.35, bodyfall: 0.7, parry: 0.55, counter: 0.7, throw: 0.8, sweep: 0.8, wallHit: 0.85, jump: 0.35, land: 0.4, landHeavy: 0.6, dash: 0.45, comboFinisher: 0.85, launch: 0.7, superReady: 0.5, superHit: 0.8, sway: 0.8, armor: 0.75, money: 0.8, special_kreed_hit: 0.85, atl_boom: 0.25, atl_bolt: 0.45, special_face_hit: 0.85, special_morgen_hit: 0.85, special_guf_hit: 0.8, special_noize_hit: 0.8, react_yard: 0.28, react_circus: 0.3, react_concert: 0.45, uiMove: 0.12, uiBack: 0.18, uiPick: 0.35, uiVs: 0.55, uiUnlock: 0.8, uiTimer: 0.5, voice_a_attack: 0.65, voice_a_hurt: 0.65, voice_a_ko: 0.8, voice_b_attack: 0.65, voice_b_hurt: 0.65, voice_b_ko: 0.8, voice_v_attack: 0.65, voice_v_ko: 0.8, voice_g_hurt: 0.65, voice_g_attack: 0.7, react_fountains: 0.5, uiConfirm: 0.25, whoosh: 0.35, ko: 0.9, roundStart: 0.4,
+  hitLight: 0.7, hitHeavy: 0.8, hitBody: 0.8, hitCrit: 0.9, block: 0.65, koHit: 1.0, superStart: 0.8, crowdReact: 0.5, hitKick: 0.75, whooshLight: 0.3, whooshHeavy: 0.35, bodyfall: 0.7, parry: 0.55, counter: 0.7, throw: 0.8, sweep: 0.8, wallHit: 0.85, jump: 0.35, land: 0.4, landHeavy: 0.6, dash: 0.45, comboFinisher: 0.85, launch: 0.7, superReady: 0.5, superHit: 0.8, sway: 0.8, armor: 0.75, money: 0.8, special_kreed_hit: 0.85, atl_boom: 0.25, atl_bolt: 0.45, special_face_hit: 0.85, special_morgen_hit: 0.85, special_guf_hit: 0.8, special_noize_hit: 0.8, react_yard: 0.28, react_circus: 0.3, react_concert: 0.45, uiMove: 0.12, uiBack: 0.18, uiPick: 0.35, uiVs: 0.55, uiUnlock: 0.8, uiTimer: 0.5, voice_a_attack: 0.85, voice_a_hurt: 0.85, voice_a_ko: 0.95, voice_b_attack: 0.85, voice_b_hurt: 0.85, voice_b_ko: 0.95, voice_v_attack: 0.85, voice_v_ko: 0.95, voice_g_hurt: 0.65, voice_g_attack: 0.85, react_fountains: 0.5, uiConfirm: 0.25, whoosh: 0.35, ko: 0.9, roundStart: 0.4,
   menuSelect: 0.3, special_guf: 0.45, special_noize: 0.4, special_oxxxy: 0.7, special_morgen: 0.7, special_maybe: 0.75, special_kreed: 0.7, special_slava: 0.75, special_atl: 0.15, special_korzh: 0.9, special_face: 0.8, special_chip: 0.8,
 };
 
@@ -489,7 +489,7 @@ function unlockAudio() {
 }
 
 function playSfx(name) {
-  if (soundHold > 0 || pageHidden || !audioUnlocked || muted) return;
+  if (soundHold > 0 || document.hidden || !audioUnlocked || muted) return;
   const bufs = sfxBuf[name];
   if (actx && bufs && bufs.length) {
     if (voices > 28) return;   // never pile up more than ~28 sounds at once
@@ -529,7 +529,7 @@ function wantedMusic() {
   return null;
 }
 function updateMusic() {
-  if (soundHold > 0 || pageHidden || !audioUnlocked || muted) { if (!music.paused) music.pause(); return; }
+  if (soundHold > 0 || document.hidden || !audioUnlocked || muted) { if (!music.paused) music.pause(); return; }
   const key = wantedMusic();
   if (key !== musicKey) {
     musicKey = key;
@@ -573,7 +573,7 @@ function voice(f, what, chance = 1) {
 const ambEl = new Audio(); ambEl.loop = true; ambEl.preload = "auto";
 let ambStage = null;
 function updateAmbience() {
-  const want = G.screen === "fight" && !G.paused && !muted && !pageHidden && soundHold === 0 && audioUnlocked ? AMBIENCE[G.stage] || null : null;
+  const want = G.screen === "fight" && !G.paused && !muted && !document.hidden && soundHold === 0 && audioUnlocked ? AMBIENCE[G.stage] || null : null;
   if (want !== ambStage) {
     ambStage = want;
     try {
@@ -591,10 +591,10 @@ function setMuted(m) {
 
 /* Sound holds: a hidden tab or an ad break silences everything at once
    (Yandex requires audio to pause on tab switch and during ads). */
-let pageHidden = false, soundHold = 0;
+let soundHold = 0;
 function audioHold(on) {
   soundHold = Math.max(0, soundHold + (on ? 1 : -1));
-  const stop = pageHidden || soundHold > 0;
+  const stop = document.hidden || soundHold > 0;
   try { if (actx) { if (stop) actx.suspend(); else actx.resume(); } } catch (e) {}
   if (stop) {
     try { if (!ambEl.paused) ambEl.pause(); } catch (e) {}
@@ -604,7 +604,7 @@ function audioHold(on) {
     updateMusic();
   }
 }
-document.addEventListener("visibilitychange", () => { pageHidden = document.hidden; audioHold(false); });
+document.addEventListener("visibilitychange", () => { audioHold(false); });
 document.addEventListener("yndk-ad-open", () => audioHold(true));
 document.addEventListener("yndk-ad-close", () => audioHold(false));
 
@@ -1182,7 +1182,7 @@ function startAttack(f, type) {
   if (mv.fallback && !(SPRITE_META[f.cid] && SPRITE_META[f.cid][mv.frame])) mv = { ...mv, frame: mv.fallback, drawn: false };
   f.action = { type, move: mv, t: 0, hitDone: false, air: !f.onGround, total: mv.startup + mv.active + mv.recovery };
   playSfx(type === "heavy" ? "whooshHeavy" : "whooshLight");
-  if (type === "heavy") voice(f, "attack", 0.35);
+  if (type === "heavy") voice(f, "attack", 0.6);
 }
 
 function startSpecial(f) {
@@ -1190,7 +1190,7 @@ function startSpecial(f) {
   f.action = { type: "special", t: 0, hitDone: false, spawned: false, total: sp.total, startup: sp.startup, sp };
   f.specialCd = Math.max(4.5, f.data.specialCd * 1.4) * (G.cheats.madness ? 0.2 : 1);
   playSfx(G.cheats.tea ? "special_guf" : sp.sfx);
-  voice(f, "attack", 0.6);
+  voice(f, "attack", 0.85);
   if (!f.isBot && !G.tutorial) { const sd = SECRETS.find((x) => x.special === f.cid); if (sd) unlockSecret(sd.id); }
   if (Math.random() < 0.35) sayQuote(f);
 }
@@ -1699,7 +1699,7 @@ function applyHit(att, def, h) {
   if ((am && am.finisher && h.melee) || counter) sfx = "hitCrit";       // the juiciest ones for finishers and counters
   playSfx(sfx);
   if (dmg >= 9 && (!att.isBot || !def.isBot)) buzz(dmg >= 13 ? 70 : 40);   // phone buzzes on strong hits
-  if (dmg >= 6 && def.hp > 0) voice(def, "hurt", 0.45);
+  if (dmg >= 6 && def.hp > 0) voice(def, "hurt", 0.7);
   if (h.launch) playSfx("launch");
   if (h.knockdown) playSfx("sweep");
   F.hitstop = Math.min(0.24, h.stop + dmg * 0.007 + (counter ? 0.04 : 0));
@@ -1832,7 +1832,7 @@ function hostPose() {
 }
 
 // Restorator's lines (approved texts)
-const HOST_LINES = { intro: "ПОШУМИМ, РЕБЯТА!", hit: "ЖАРИШКО!", ko: "НЕПЛОХО!", match: "ЭТО БЫЛ ВЕРСУС БАТТЛ..." };
+const HOST_LINES = { intro: "ПОШУМИМ, БЛ*ТЬ!", hit: "ЖАРИШКО!", ko: "НЕПЛОХО!", match: "ЭТО БЫЛ ВЕРСУС БАТТЛ..." };
 function hostLine() {
   if (!F) return null;
   if (F.phase === "intro") return HOST_LINES.intro;
@@ -1896,7 +1896,7 @@ function drawBarCrowd(camX) {
 /* Super moves, throws                                                 */
 /* ------------------------------------------------------------------ */
 const SUPER_NAMES = {
-  guf: "ХЛЕБНИ ЧАЯ!", noize: "MAKE SOME NOIZE", oxxxy: "РАУНД, ДЕРЖИСЬ", morgen: "МОЛОДОЙ АРИСТОКРАТ",
+  guf: "ХЛЕБНИ ЧАЯ!", noize: "MAKE SOME NOIZE", oxxxy: "РАУНД, С*КА", morgen: "МОЛОДОЙ АРИСТОКРАТ",
   maybe: "БИЛЕТ В МЭЙБИЛЭНД!", kreed: "СЮДА, БЛИН", slava: "ПОРА ЗАКИПАТЬ!", atl: "Я ТЕБЯ ОТПЕЛ",
   korzh: "МАЛЫЙ ПОВЗРОСЛЕЛ", face: "Я РОНЯЮ ЗАПАД", chip: "ЭТО МОЁ ГЭНГСТА!",
 };
@@ -4119,10 +4119,10 @@ const ARCADE_TEXT = {
   champion: "ЧЕМПИОН!",
 };
 const ARCADE_ENDINGS = {
-  guf: "Непредсказуемый мастер всех обошёл.",
+  guf: "Пьяный мастер всех обошёл.",
   noize: "Нойз МС — царь горы.",
   oxxxy: "Хитрый Окс опять всех переиграл.",
-  morgen: "Молодой аристократ снова обошёл всю игру.",
+  morgen: "Алишер Моргенштерн снова трахнул игру.",
   maybe: "Мэйби Бэйби доказала, что она мать рэп игры.",
   kreed: "Егор устроил шоу-представление.",
   slava: "АНТИХАЙП ПОБЕДИЛ.",
@@ -4670,8 +4670,8 @@ function chooseStage(id) {
 
 /* VS screen ------------------------------------------------------------ */
 const VS_LINES = [
-  "КТО-ТО СЕГОДНЯ ВЫЛЕТИТ", "БИФ СЕЗОНА", "КОМУ-ТО НЕ ПОВЕЗЁТ", "ГОТОВЬТЕ ПАНЧИ",
-  "ЧЬЮ КАРЬЕРУ ХОРОНИМ?", "БУДЕТ МЯСО", "ПОШУМИМ, РЕБЯТА",
+  "КТО-ТО СЕГОДНЯ ВЫЛЕТИТ", "БИФ СЕЗОНА", "КОМУ-ТО ПИЗД*Ц", "ГОТОВЬТЕ ПАНЧИ",
+  "ЧЬЮ КАРЬЕРУ ХОРОНИМ?", "БУДЕТ МЯСО", "ПОШУМИМ, БЛ*ТЬ",
 ];
 function startVs() {
   const [c0, c1] = G.chars;
@@ -5070,7 +5070,7 @@ function quoteEffect(f, line) {
   } else if (line.includes("ЭТУ РОЗУ")) {
     F.roses = 2.6;
     unlockSecret("rose");
-  } else if (line.includes("ПЛАСТИЛИНОВЫЙ ГНОМ")) {
+  } else if (line.includes("СИЛИКОНОВЫЙ ГНОМ")) {
     F.peek = { key: "gnome", t: 0, side: f.slot === 0 ? 1 : -1 };   // a gnome's face peeks in from the edge
     unlockSecret("eggs");
   } else if (line === "АЛИК В УДАРЕ") {
