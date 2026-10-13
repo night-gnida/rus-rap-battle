@@ -5,6 +5,7 @@
 - Введена схема двух версий: `main` (цензурная, публикация) и `uncensored` (мат, для себя) — **в разных репозиториях**: `night-gnida/rus-rap-battle` и `night-gnida/rus-rap-battle-uncensored`. Общие фиксы — cherry-pick в обе.
 - Добавлен этап P (платформы): P1 platform-адаптер → P2 VK Games → P3 ОК → P4 Android/iOS (Capacitor; приоритет RuStore + VK Play). Требования ВК/ОК собраны в ROADMAP.
 - Публикуется всегда только цензурная версия.
+- Изучены и вписаны в P4 правила магазинов: **RuStore** — без блокеров из РФ (карточка с маркировками внутриигрового контента, 12+ по 445-ФЗ); **Google Play** — из РФ только бесплатно + обязательный закрытый тест 12 тестеров × 14 дней + IARC + Minimum Functionality для WebView; **App Store** — backlog ($99/год из РФ не оплатить, Guideline 4.2, риск 17+).
 
 ---
 
