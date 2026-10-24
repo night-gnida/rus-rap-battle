@@ -1358,7 +1358,7 @@ function updateFighter(f, opp, dt) {
   }
   if (f.onGround && f.ko) f.vx *= Math.pow(0.02, dt);
 
-  // Wall splat (FACE's yoko-geri)
+  // Wall splat (Bif's yoko-geri)
   f.wallT = Math.max(0, (f.wallT || 0) - dt);
   if (f.wallT > 0 && !f.ko && ((f.x <= WALL_L + 2 && f.vx < -150) || (f.x >= WALL_R - 2 && f.vx > 150))) {
     f.wallT = 0;
@@ -3054,7 +3054,7 @@ function drawFighter(f) {
     }
   }
   if (f.land > 0) { const k = f.land / 0.12 * (f.data.weight || 1); sy *= 1 - 0.08 * k; sx *= 1 + 0.06 * k; }
-  if (f.bigT > 0) {   // "Алик в ударе": swells up, then shrinks back
+  if (f.bigT > 0) {   // "Гусь в ударе": swells up, then shrinks back
     f.bigT -= 1 / 60;
     const k = Math.min(1, Math.min(5 - f.bigT, f.bigT) / 0.35);
     sx *= 1 + 0.3 * k; sy *= 1 + 0.3 * k;
@@ -5050,7 +5050,7 @@ function quoteEffect(f, line) {
     F.flicker = 1.6;
     F.shake = Math.max(F.shake, 14);
     unlockSecret("destroy");
-  } else if (line === "МНЕ ПОХ") {
+  } else if (line.includes("МНЕ ВСЁ РАВНО")) {
     F.money = 2.6;
     unlockSecret("money");
   } else if (line.includes("ЖРИ МОЙ БУРГЕР")) {
@@ -5073,8 +5073,8 @@ function quoteEffect(f, line) {
     F.peek = { key: "gnome", t: 0, side: f.slot === 0 ? 1 : -1 };   // a gnome's face peeks in from the edge
     unlockSecret("eggs");
   } else if (line === "ГУСЬ В УДАРЕ") {
-    f.bigT = 5;   // Guf grows for a few seconds
-    unlockSecret("alik");
+    f.bigT = 5;   // Goose grows for a few seconds
+    unlockSecret("goose_buff");
   }
 }
 
@@ -5120,7 +5120,7 @@ function updateEasterFx(dt) {
   F.birds = F.birds.filter((b) => b.x > -500 && b.x < W + 500 && Math.abs(b.vx) > 0 && !(b.vx > 0 && b.x > W + 60) && !(b.vx < 0 && b.x < -60));
 }
 
-// A face peeks in from the screen edge for a moment (Maybe's gnome, Slava's Zamay)
+// A face peeks in from the screen edge for a moment (Maybe's gnome)
 function drawPeek() {
   const p = F.peek;
   if (!p) return;
@@ -5133,11 +5133,10 @@ function drawPeek() {
   const right = p.side > 0;
   ctx.save();
   if (im) {
-    // the picture is drawn for the right edge (Zamay is cut off on the right and bottom); mirrored for the left
+    // the picture is drawn for the right edge; mirrored for the left
     const h = im.naturalHeight, w = im.naturalWidth;
-    const flush = p.key === "zamay";
-    const x = W - w * e + (flush ? 0 : 20);
-    const y = H - h - (flush ? 0 : 60) + (flush ? 0 : Math.sin(p.t * 9) * 4);
+    const x = W - w * e + 20;
+    const y = H - h - 60 + Math.sin(p.t * 9) * 4;
     if (!right) { ctx.translate(W, 0); ctx.scale(-1, 1); }
     ctx.drawImage(im, Math.round(x), Math.round(y), w, h);
   } else if (p.key === "gnome") {

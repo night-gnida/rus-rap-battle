@@ -1,0 +1,9 @@
+# Игровые файлы не экспортируются в архив для публикации (git archive / rus-rap-battle-yandex.zip):
+# внутренние доки содержат историю разработки, которую в билд отдавать нельзя.
+README.md export-ignore
+ROADMAP.md export-ignore
+docs/ export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+# Неиспользуемая картинка реального лица — в билд не отдаём.
+assets/effects/zamay.png export-ignore
